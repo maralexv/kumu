@@ -9,34 +9,37 @@
 </head>
 <body>
 
-<?php
+    <h1>Test: php import of a csv file into an array.</h1>
+    <br>
 
-$filename = 'kumu_input.csv';
+    <?php
 
-// The nested array to hold all the arrays
-$myarray = []; 
+    $filename = 'kumu_input.csv';
 
-// Open the file for reading
-if (($filepointer = fopen("{$filename}", "r")) !== FALSE) 
-{
-  // Each line in the file is converted into an individual array that we call $data
-  // The items of the array are comma separated
-  while (($data = fgetcsv($filepointer, 1000, ",")) !== FALSE) 
-  {
-    // Each individual array is being pushed into the nested array
-    $myarray[] = $data;		
-  }
+    // The nested array to hold all the arrays
+    $myarray = []; 
 
-  // Close the file
-  fclose($filepointer);
-}
+    // Open the file for reading
+    if (($filepointer = fopen("{$filename}", "r")) !== FALSE) 
+    {
+    // Each line in the file is converted into an individual array that we call $data
+    // The items of the array are comma separated
+    while (($data = fgetcsv($filepointer, 1000, ",")) !== FALSE) 
+    {
+        // Each individual array is being pushed into the nested array
+        $myarray[] = $data;		
+    }
 
-// Display the code in a readable format
-echo "<pre>";
-var_dump($myarray);
-echo "</pre>";
+    // Close the file
+    fclose($filepointer);
+    }
 
-?>
+    // Display the code in a readable format
+    echo "<pre>";
+    var_dump($myarray);
+    echo "</pre>";
+
+    ?>
     
 </body>
 </html>
