@@ -9,9 +9,6 @@
 </head>
 <body>
 
-    <h1>Test: php import of a csv file into an array.</h1>
-    <br>
-
     <?php
 
     $filename = 'kumu_input.csv';
@@ -72,7 +69,7 @@
             // and if yes, add pointer to that project at the end of the array item
 
 
-            
+
     }
 
     // Close the file
