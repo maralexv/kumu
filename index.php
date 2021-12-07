@@ -29,47 +29,23 @@
 
     for ($i = 1; $i < count($myarray)/2; $i++) 
     {
-            // check if [i][4] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
+        // starting from the next item, check if same divisions, 
+        // stakeholders or departments appear in other items
+        for ($j = 4; $j < count($myarray[$i]); $j++)
+        {
+            for ($k = $i+1; $k < count($myarray); $k++)
+            {
+                for ($m = 4; $m < count($myarray[$k]); $m++)
+                {
+                    if ($myarray[$i][$j] == $myarray[$k][$m])
+                    {
+                        // if yes, add pointer to that project at the end of the 
+                        // current ith item
+                    }
 
-
-            // check if [i][5] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
-
-
-            // check if [i][6] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
-
-
-            // check if [i][7] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
-
-
-            // check if [i][8] appears in other sub-arrays
-            // and if yes, add strong pointer to that project at the end of the array item
-
-
-            // check if [i][10] appears in other sub-arrays
-            // and if yes, add strong pointer to that project at the end of the array item
-
-
-            // check if [i][12] appears in other sub-arrays
-            // and if yes, add strong pointer to that project at the end of the array item
-
-
-            // check if [i][9] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
-
-
-            // check if [i][11] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
-
-
-            // check if [i][13] appears in other sub-arrays
-            // and if yes, add pointer to that project at the end of the array item
-
-
-
+                }    
+            }
+        }
     }
 
     // Close the file
@@ -82,8 +58,8 @@
     echo "</pre>";
 
     echo "<p>";
-    echo "array length: " . count($myarray) . "<br>";
-    echo $myarray[7][8];
+    echo "half-length = " . count($myarray)/2 . "<br>";
+    echo "item [7][8] = " . $myarray[7][8];
     echo "</p>";
 
     ?>
