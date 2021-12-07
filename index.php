@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sandbox</title>
 </head>
 <body>
 
@@ -30,6 +30,51 @@
         $myarray[] = $data;		
     }
 
+    for ($i = 1; $i < count($myarray)/2; $i++) 
+    {
+            // check if [i][4] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            // check if [i][5] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            // check if [i][6] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            // check if [i][7] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            // check if [i][8] appears in other sub-arrays
+            // and if yes, add strong pointer to that project at the end of the array item
+
+
+            // check if [i][10] appears in other sub-arrays
+            // and if yes, add strong pointer to that project at the end of the array item
+
+
+            // check if [i][12] appears in other sub-arrays
+            // and if yes, add strong pointer to that project at the end of the array item
+
+
+            // check if [i][9] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            // check if [i][11] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            // check if [i][13] appears in other sub-arrays
+            // and if yes, add pointer to that project at the end of the array item
+
+
+            
+    }
+
     // Close the file
     fclose($filepointer);
     }
@@ -38,6 +83,11 @@
     echo "<pre>";
     var_dump($myarray);
     echo "</pre>";
+
+    echo "<p>";
+    echo "array length: " . count($myarray) . "<br>";
+    echo $myarray[7][8];
+    echo "</p>";
 
     ?>
     
