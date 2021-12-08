@@ -11,56 +11,84 @@
 
     <?php
 
+    // Pointer to the file
     $filename = 'kumu_input.csv';
 
     // The nested array to hold all the arrays
-    $myarray = []; 
+    $arr = []; 
 
     // Open the file for reading
     if (($filepointer = fopen("{$filename}", "r")) !== FALSE) 
     {
-    // Each line in the file is converted into an individual array that we call $data
-    // The items of the array are comma separated
-    while (($data = fgetcsv($filepointer, 1000, ",")) !== FALSE) 
-    {
-        // Each individual array is being pushed into the nested array
-        $myarray[] = $data;		
+        // Each line in the file is converted into an individual array that we call $data
+        // The items of the array are comma separated
+        while (($data = fgetcsv($filepointer, 1000, ",")) !== FALSE) 
+        {
+            // Each individual array is being pushed into the nested array
+            $arr[] = $data;	
+        }
+
+        // Close the file
+        fclose($filepointer);
     }
 
-    for ($i = 1; $i < count($myarray)/2; $i++) 
+    // Add an empty array (repository of connections) in the last item 
+    // of the main array 
+    for ($i = 0; $i < count($arr); $i++)
     {
-        // starting from the next item, check if same divisions, 
-        // stakeholders or departments appear in other items
-        for ($j = 4; $j < count($myarray[$i]); $j++)
-        {
-            for ($k = $i+1; $k < count($myarray); $k++)
-            {
-                for ($m = 4; $m < count($myarray[$k]); $m++)
-                {
-                    if ($myarray[$i][$j] == $myarray[$k][$m])
-                    {
-                        // if yes, add pointer to that project at the end of the 
-                        // current ith item
-                    }
+        $arr[$i][count($arr[$i])-1] = [];
+    }
 
+    // Create additjonal array, its dimentios the same as the main array
+    // to keep the connections 
+    $con_arr = [];
+    for ($i = 0; $i < count($arr); $i++)
+    {
+        for ($j = 0; $j < count($arr[$i]); $j++)
+        {
+            $con_arr[$i][$j] = [];
+        }
+    }
+
+    echo "<p>";
+    echo "hight of matrix (number of rows) = " . count($arr) . "<br>";
+    echo "length of row 1 = " . count($arr[1]) . "<br>";
+    echo "</p>";
+
+    for ($i = 1; $i < count($arr)-1; $i++) 
+    {
+        // starting from the next item, check if [i][j] values appear 
+        // in other cells of the matrix
+        for ($j = 4; $j < count($arr[$i])-1; $j++)
+        {
+            if (empty($arr[$i][$j]) || $arr[$i][$j] == $arr[$i][$j-2])
+            {
+                continue;
+            }
+
+            for ($k = $i+1; $k < count($arr); $k++)
+            {
+                for ($m = 4; $m < count($arr[$k])-1; $m++)
+                {
+                    // If items match, record pointers in the conn_array
+                    if ($arr[$i][$j] == $arr[$k][$m])
+                    {
+                        array_push($con_arr[$i][$j], [$k, $m]);
+                        array_push($con_arr[$k][$m], [$i, $j]);
+                    }
                 }    
             }
         }
     }
 
-    // Close the file
-    fclose($filepointer);
-    }
-
-    // Display the code in a readable format
+    // Display the array in a readable format
     echo "<pre>";
-    var_dump($myarray);
+    var_dump($arr);
     echo "</pre>";
 
-    echo "<p>";
-    echo "half-length = " . count($myarray)/2 . "<br>";
-    echo "item [7][8] = " . $myarray[7][8];
-    echo "</p>";
+    echo "<pre>";
+    print_r($con_arr);
+    echo "</pre>";
 
     ?>
     
