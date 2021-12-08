@@ -85,6 +85,8 @@
         }
     }
 
+    // Record conneciotns in the main array, inserting connected Project IDs 
+    // as elements of the array in Connections (item 14) for each project
     for ($i = 0; $i < count($con_arr); $i++)
     {
         for ($j = 0; $j < count($con_arr[$i]); $j++)
@@ -96,10 +98,13 @@
 
             for ($el = 0; $el < count($con_arr[$i][$j]); $el++)
             {
-                array_push($arr[$i][14], $arr[$con_arr[$i][$j][$el][0]][1]);
+                array_push($arr[$i][14], $arr[$con_arr[$i][$j][$el][0]][0]);
             }
         }
     }
+
+    // Dump main array into a csv file
+    
 
     // Display the array in a readable format
     echo "<pre>";
