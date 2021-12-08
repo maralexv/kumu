@@ -61,16 +61,20 @@
         // in other cells of the matrix
         for ($j = 4; $j < count($arr[$i])-1; $j++)
         {
+            // If the item in the row is empty OR equal to the prev one 
+            // (eg. stakeholder fomr the same division), skip amnd move to 
+            // the next item
             if (empty($arr[$i][$j]) || $arr[$i][$j] == $arr[$i][$j-2])
             {
                 continue;
             }
 
+            // Loop through all the items in the following rows
             for ($k = $i+1; $k < count($arr); $k++)
             {
                 for ($m = 4; $m < count($arr[$k])-1; $m++)
                 {
-                    // If items match, record pointers in the conn_array
+                    // If items match, record pointers 
                     if ($arr[$i][$j] == $arr[$k][$m])
                     {
                         array_push($con_arr[$i][$j], [$k, $m]);
@@ -80,6 +84,27 @@
             }
         }
     }
+
+    // Record conneciotns in the main array, inserting connected Project IDs 
+    // as elements of the array in Connections (item 14) for each project
+    for ($i = 0; $i < count($con_arr); $i++)
+    {
+        for ($j = 0; $j < count($con_arr[$i]); $j++)
+        {
+            if (empty($con_arr[$i][$j]))
+            {
+                continue;
+            }
+
+            for ($el = 0; $el < count($con_arr[$i][$j]); $el++)
+            {
+                array_push($arr[$i][14], $arr[$con_arr[$i][$j][$el][0]][0]);
+            }
+        }
+    }
+
+    // Dump main array into a csv file
+    
 
     // Display the array in a readable format
     echo "<pre>";
