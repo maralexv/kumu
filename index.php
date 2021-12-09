@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandbox</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
 
@@ -14,7 +15,8 @@
     // Pointer to the file
     $filename = 'kumu_input.csv';
 
-    // The nested array to hold all the arrays
+    // Initiate main array to hold all the data form scv file 
+    // and record inter-project connections
     $arr = []; 
 
     // Open the file for reading
@@ -50,11 +52,7 @@
         }
     }
 
-    echo "<p>";
-    echo "hight of matrix (number of rows) = " . count($arr) . "<br>";
-    echo "length of row 1 = " . count($arr[1]) . "<br>";
-    echo "</p>";
-
+    // Loop through the main array to record connections in con_arr
     for ($i = 1; $i < count($arr)-1; $i++) 
     {
         // starting from the next item, check if [i][j] values appear 
@@ -98,13 +96,10 @@
 
             for ($el = 0; $el < count($con_arr[$i][$j]); $el++)
             {
-                array_push($arr[$i][14], $arr[$con_arr[$i][$j][$el][0]][0]);
+                array_push($arr[$i][count($arr[$i])-1], $arr[$con_arr[$i][$j][$el][0]][0]);
             }
         }
     }
-
-    // Dump main array into a csv file
-    
 
     // Display the array in a readable format
     echo "<pre>";
