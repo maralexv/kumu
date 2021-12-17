@@ -38,3 +38,8 @@ y = json.loads(x)
 # the result is a Python dictionary:
 print(y["age"])
 print(y)
+
+dic = {"a": [{"c":1, "d":3}, 2, 3], "b": [12, 35, 96]}
+a = dic["a"]
+a.pop(0)
+print (dic)
